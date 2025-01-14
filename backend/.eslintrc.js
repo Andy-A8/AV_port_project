@@ -7,7 +7,7 @@ module.exports = {
   },
   extends: [
     'eslint: recommended',
-    'plugin': 'jest/all',
+    'plugin:jest/all',
   ],
   globals: {
     Atomics: 'readonly',
