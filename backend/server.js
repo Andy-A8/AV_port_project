@@ -1,16 +1,13 @@
 const express = require('express');
 const cors = require('cors');
+const routes = require('./routes/index');
 
 const app = express();
 
 // middleware
 app.use(cors());
 app.use(express.json());
-
-// Basic route - GET method
-app.get('/', (req, res) => {
-  res.send('API is running...');
-});
+app.use('/', routes);
 
 // Start Server(index.js)
 const PORT = process.env.PORT || 5000;
