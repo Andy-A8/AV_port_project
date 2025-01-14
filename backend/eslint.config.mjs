@@ -15,5 +15,5 @@ export default [
       globals: globals.browser
     }
   },
-  pluginsJs.configs.recommended
+  pluginJs.configs.recommended
 ];
