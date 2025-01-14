@@ -1,8 +1,9 @@
 module.exports = {
   env: {
-    browser: false,
+    browser: true,
     es6: true,
     node: true,
+    commonjs: true,
     jest: true,
   },
   extends: [
@@ -12,6 +13,7 @@ module.exports = {
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
+    process: true,
   },
   parserOptions: {
     ecmaVersion: 2018,
