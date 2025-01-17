@@ -1,9 +1,9 @@
 const express = require('express');
+const { getAllAlgorithms, getAlgorithmByName } = require("../controllers/algorithmController");
+
 const router = express.Router();
 
-// Example route
-router.get('/', (req, res) => {
-  res.send('API is working!');
-});
+router.get('/algorithms', getAllAlgorithms);
+router.get('/algorithms/:name', getAlgorithmByName);
 
 module.exports = router;
