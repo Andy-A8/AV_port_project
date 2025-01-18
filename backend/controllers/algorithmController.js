@@ -11,6 +11,6 @@ exports.getAlgorithmByName = (req, res) => {
   const { name } = req.params;
   res.json({
     name,
-    description: '${name} is a placeholder for now.'
+    description: `${name} is a placeholder for now.`,
   });
 };
