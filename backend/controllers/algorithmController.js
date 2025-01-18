@@ -2,7 +2,7 @@ exports.getAllAlgorithms = (req, res) => {
   res.json({
     algorithms: [
       {name: "Bubble Sort", description: "A simple sorting algorithm." },
-      {name: "Quick Sort", description: "A divide-and-conquer sorting algorithm." }
+      {name: "Quick Sort", description: "A divide-and-conquer sorting algorithm." },
     ],
   });
 };
