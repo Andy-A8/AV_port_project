@@ -10,6 +10,9 @@ module.exports = {
     'eslint: recommended',
     'plugin:jest/all',
   ],
+  rules: {
+    'no-unused-vars': ['error', { 'args': 'none' }]
+  },
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
