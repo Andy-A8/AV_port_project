@@ -3,7 +3,7 @@ const cors = require('cors');
 const routes = require('./routes/index');
 const apiRoutes = require("./routes/api");
 const bodyParser = require("body-parser");
-
+require('dotenv').config();
 const app = express();
 
 // Middleware
@@ -35,5 +35,9 @@ app.use((err, req, res, next) => {
 
 // Start Server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log("Server is running on port ${PORT}"));
-app.listen(3000, () => console.log("Server is running on port 3000"));
+app.listen(PORT, () => {
+	console.log("Server is running on http://localhost:${PORT}");
+});
+app.listen(3000, () => {
+	console.log("Server is running on port 3000");
+});
