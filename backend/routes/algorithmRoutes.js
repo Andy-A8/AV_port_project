@@ -1,25 +1,26 @@
 const express = require('express');
 const router = express.Router();
+const { validateArray } = require('../middleware/validate_input');
 
 // Sorting Routes
-router.post('/sort/bubble', (req, res) => {
+router.post('/sort/bubble', validateArray, (req, res) => {
   res.send('Bubble sort logic will go here.');
 });
 
-router.post('/sort/quick', (req, res) => {
+router.post('/sort/quick', validateArray, (req, res) => {
   res.send('Quick sort logic will go here.');
 });
 
-router.post('/sort/merge', (req, res) => {
+router.post('/sort/merge', validateArray, (req, res) => {
   res.send('Merge sort logic will go here.');
 });
 
 // Searching Routes
-router.post('/search/linear', (req, res) => {
+router.post('/search/linear', validateArray, (req, res) => {
   res.send('Linear search logic will go here.');
 });
 
-router.post('/search/binary', (req, res) => {
+router.post('/search/binary', validateArray, (req, res) => {
   res.send('Binary search logic will go here.');
 });
 
