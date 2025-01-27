@@ -3,7 +3,7 @@ const router = express.Router();
 const { validateArray } = require('../middleware/validate_input');
 
 // Sorting Routes
-router.post('/sort/bubble', validateArray, (req, res) => {
+router.get('/sort/bubble', validateArray, (req, res) => {
   res.send('Bubble sort logic will go here.');
 });
 
@@ -16,7 +16,7 @@ router.post('/sort/merge', validateArray, (req, res) => {
 });
 
 // Searching Routes
-router.post('/search/linear', validateArray, (req, res) => {
+router.get('/search/linear', validateArray, (req, res) => {
   res.send('Linear search logic will go here.');
 });
 
