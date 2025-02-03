@@ -1,16 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const { validateArray } = require('../middleware/validate_input');
+
+// Import middleware for input validation
+const { validateArray, validateSearchInput } = require('../middleware/validate_input');
+
+// Import sorting and searching service functions
 const { bubbleSort, quickSort, mergeSort } = require('../services/sortingService');
 const { linearSearch, binarySearch } = require('../services/searchingService');
 
 // Sorting Routes
-router.post('/sort/bubble', (req, res) => {
+router.post('/sort/bubble', validateArray, (req, res) => {
   try {
     const { array } = req.body;
-    if (!Array.isArray(array)) {
-      throw new Error('Input must be an array');
-    }
     const result = bubbleSort(array);
     res.status(200).json(result);
   } catch (err) {
@@ -18,12 +19,9 @@ router.post('/sort/bubble', (req, res) => {
   }
 });
 
-router.post('/sort/quick', (req, res) => {
+router.post('/sort/quick', validateArray, (req, res) => {
   try {
     const { array } = req.body;
-    if (!Array.isArray(array)) {
-      throw new Error('Input must be an array');
-    }
     const result = quickSort(array);
     res.status(200).json(result);
   } catch (err) {
@@ -31,12 +29,9 @@ router.post('/sort/quick', (req, res) => {
   }
 });
 
-router.post('/sort/merge', (req, res) => {
+router.post('/sort/merge', validateArray, (req, res) => {
   try {
     const { array } = req.body;
-    if (!Array.isArray(array)) {
-      throw new Error('Input must be an array');
-    }
     const result = mergeSort(array);
     res.status(200).json(result);
   } catch (err) {
@@ -45,12 +40,9 @@ router.post('/sort/merge', (req, res) => {
 });
 
 // Searching Routes
-router.post('/search/linear', (req, res) => {
+router.post('/search/linear', validateSearchInput, (req, res) => {
   try {
     const { array, target } = req.body;
-    if (!Array.isArray(array)) {
-      throw new Error('Input must be an array');
-    }
     const result = linearSearch(array, target);
     res.status(200).json(result);
   } catch (err) {
@@ -58,13 +50,13 @@ router.post('/search/linear', (req, res) => {
   }
 });
 
-router.post('/search/binary', (req, res) => {
+router.post('/search/binary', validateSearchInput, (req, res) => {
   try {
     const { array, target } = req.body;
-    if (!Array.isArray(array)) {
-      throw new Error('Input must be an array');
-    }
-    const sortedArray = [...array].sort((a, b) => a - b); // Ensure array is sorted
+
+    // Ensure array is sorted for binary search
+    const sortedArray = [...array].sort((a, b) => a - b);
+
     const result = binarySearch(sortedArray, target);
     res.status(200).json(result);
   } catch (err) {
@@ -80,4 +72,5 @@ router.get('/metadata', (req, res) => {
   });
 });
 
+// Export the router
 module.exports = router;
