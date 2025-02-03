@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { validateArray } = require('../middleware/validate_input');
 const { bubbleSort, quickSort, mergeSort } = require('../services/sortingService');
+const { linearSearch, binarySearch } = require('../services/searchingService');
 
 // Sorting Routes
 router.post('/sort/bubble', (req, res) => {
@@ -44,12 +45,31 @@ router.post('/sort/merge', (req, res) => {
 });
 
 // Searching Routes
-router.post('/search/linear', validateArray, (req, res) => {
-  res.send('Linear search logic will go here.');
+router.post('/search/linear', (req, res) => {
+  try {
+    const { array, target } = req.body;
+    if (!Array.isArray(array)) {
+      throw new Error('Input must be an array');
+    }
+    const result = linearSearch(array, target);
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 });
 
-router.post('/search/binary', validateArray, (req, res) => {
-  res.send('Binary search logic will go here.');
+router.post('/search/binary', (req, res) => {
+  try {
+    const { array, target } = req.body;
+    if (!Array.isArray(array)) {
+      throw new Error('Input must be an array');
+    }
+    const sortedArray = [...array].sort((a, b) => a - b); // Ensure array is sorted
+    const result = binarySearch(sortedArray, target);
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 });
 
 // Metadata Route
