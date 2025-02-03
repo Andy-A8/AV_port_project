@@ -18,15 +18,29 @@ router.post('/sort/bubble', (req, res) => {
 });
 
 router.post('/sort/quick', (req, res) => {
-  const { array } = req.body;
-  const result = quickSort(array);
-  res.status(200).json(result);
+  try {
+    const { array } = req.body;
+    if (!Array.isArray(array)) {
+      throw new Error('Input must be an array');
+    }
+    const result = quickSort(array);
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 });
 
 router.post('/sort/merge', (req, res) => {
-  const { array } = req.body;
-  const result = mergeSort(array);
-  res.status(200).json(result);
+  try {
+    const { array } = req.body;
+    if (!Array.isArray(array)) {
+      throw new Error('Input must be an array');
+    }
+    const result = mergeSort(array);
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 });
 
 // Searching Routes
