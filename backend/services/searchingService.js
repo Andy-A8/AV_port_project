@@ -1,5 +1,7 @@
 // Searching Algorithms Service
 
+// Linear search function
+
 function linearSearch(array, target) {
   const steps = []; // To store the indexes visited for visualization
   for (let i = 0; i < array.length; i++) {
@@ -10,6 +12,8 @@ function linearSearch(array, target) {
   }
   return { found: false, index: -1, steps }; // If target not found
 }
+
+// Binary search function
 
 function binarySearch(array, target) {
   const steps = []; // To store the indexes visited for visualization
