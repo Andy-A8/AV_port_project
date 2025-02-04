@@ -9,6 +9,7 @@ const { bubbleSort, quickSort, mergeSort } = require('../services/sortingService
 const { linearSearch, binarySearch } = require('../services/searchingService');
 
 // Sorting Routes
+// Bubble Sort Route
 router.post('/sort/bubble', validateArray, (req, res) => {
   try {
     const { array } = req.body;
@@ -19,6 +20,7 @@ router.post('/sort/bubble', validateArray, (req, res) => {
   }
 });
 
+// Quick Sort Route
 router.post('/sort/quick', validateArray, (req, res) => {
   try {
     const { array } = req.body;
@@ -29,6 +31,7 @@ router.post('/sort/quick', validateArray, (req, res) => {
   }
 });
 
+// Merge Sort Route
 router.post('/sort/merge', validateArray, (req, res) => {
   try {
     const { array } = req.body;
@@ -40,6 +43,7 @@ router.post('/sort/merge', validateArray, (req, res) => {
 });
 
 // Searching Routes
+// Linear Search Route
 router.post('/search/linear', validateSearchInput, (req, res) => {
   try {
     const { array, target } = req.body;
