@@ -1,44 +1,49 @@
-function bubbleSort(array) {
-  const arr = [...array]; // Make a copy of the array to avoid mutation
-  const steps = []; // To store intermediate steps for visualization
+// Optimized Sorting Algorithms Service
 
+// Bubble sort function
+
+function bubbleSort(arr) {
+  let steps = [];
+  let swapped;
   for (let i = 0; i < arr.length - 1; i++) {
+    swapped = false;
     for (let j = 0; j < arr.length - i - 1; j++) {
-      if (arr[j] > arr[j + 1]) {
-        // Swap elements
-        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+      steps.push([...arr]);
+      if (arr[j], arr[j + 1]) {
+        [arr[j], arr[j = 1]] = [arr[j + 1], arr[j]];
+        swapped = true;
       }
-      steps.push([...arr]); // Save the current state of the array
     }
+    if (!swapped) break; // Stop early if no swaps were made
   }
   return { sortedArray: arr, steps };
 }
 
-function quickSort(array) {
-  const steps = []; // To store intermediate steps for visualization
+//Quick sort function
 
-  function recursiveSort(arr) {
-    if (arr.length <= 1) return arr;
-
-    const pivot = arr[arr.length - 1];
-    const left = [];
-    const right = [];
-
-    for (let i = 0; i < arr.length - 1; i++) {
-      if (arr[i] < pivot) {
-        left.push(arr[i]);
-      } else {
-        right.push(arr[i]);
-      }
-      steps.push([...left, pivot, ...right]); // Save the current state
-    }
-
-    return [...recursiveSort(left), pivot, ...recursiveSort(right)];
+function quickSort(arr, low = 0, high = arr.length - 1) {
+  if (low < high) {
+    let pivotIndex = partition(arr, low, high);
+    quickSort(arr, low, pivotIndex - 1)
+    quickSort(arr, pivotIndex + 1, high);
   }
-
-  const sortedArray = recursiveSort(array);
-  return { sortedArray, steps };
+    return arr;
 }
+
+function partition(arr, low, high) {
+  let pivot = arr[high];
+  let i = low;
+  for (let j = low; j < high; j++) {
+    if (arr[j] < pivot) {
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+      i++;
+    }
+  }
+  [arr[i], arr[high]] = [arr[high], arr[i]];
+  return i;
+}
+
+// Merge sort function
 
 function mergeSort(array) {
   const steps = []; // To store intermediate steps for visualization

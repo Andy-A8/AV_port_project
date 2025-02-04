@@ -1,3 +1,5 @@
+// Searching Algorithms Service
+
 function linearSearch(array, target) {
   const steps = []; // To store the indexes visited for visualization
   for (let i = 0; i < array.length; i++) {
