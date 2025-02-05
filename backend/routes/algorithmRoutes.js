@@ -8,13 +8,19 @@ const { validateArray, validateSearchInput } = require('../middleware/validate_i
 const { bubbleSort, quickSort, mergeSort } = require('../services/sortingService');
 const { linearSearch, binarySearch } = require('../services/searchingService');
 
+// Import execution time measurement
+const { measureExecutionTime } = require('../utils/performance');
+
+// Import execution for logging algorithms
+const AlgorithmLog = require('../models/AlgorithmLog');
+
 // Sorting Routes
 // Bubble Sort Route
 router.post('/sort/bubble', validateArray, (req, res) => {
   try {
     const { array } = req.body;
-    const result = bubbleSort(array);
-    res.status(200).json(result);
+    const { result, timeTaken } = measureExecutionTime(bubbleSort, [array]);
+    res.status(200).json({ sortedArray: result, executionTime: timeTaken });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -24,8 +30,8 @@ router.post('/sort/bubble', validateArray, (req, res) => {
 router.post('/sort/quick', validateArray, (req, res) => {
   try {
     const { array } = req.body;
-    const result = quickSort(array);
-    res.status(200).json(result);
+    const { result, timeTaken } = measureExecutionTime(quickSort, [array]);
+    res.status(200).json({ sortedArray: result, executionTime: timeTaken });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -35,8 +41,8 @@ router.post('/sort/quick', validateArray, (req, res) => {
 router.post('/sort/merge', validateArray, (req, res) => {
   try {
     const { array } = req.body;
-    const result = mergeSort(array);
-    res.status(200).json(result);
+    const { result, timeTaken } = measureExecutionTime(mergeSort, [array]);
+    res.status(200).json({ sortedArray: result, executionTime: timeTaken });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -47,13 +53,14 @@ router.post('/sort/merge', validateArray, (req, res) => {
 router.post('/search/linear', validateSearchInput, (req, res) => {
   try {
     const { array, target } = req.body;
-    const result = linearSearch(array, target);
-    res.status(200).json(result);
+    const { result, timeTaken } = measureExecutionTime(linearSearch, [array, target]);
+    res.status(200).json({ foundAtIndex: result, executionTime: timeTaken });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
 
+// Binary Search Route
 router.post('/search/binary', validateSearchInput, (req, res) => {
   try {
     const { array, target } = req.body;
@@ -61,10 +68,21 @@ router.post('/search/binary', validateSearchInput, (req, res) => {
     // Ensure array is sorted for binary search
     const sortedArray = [...array].sort((a, b) => a - b);
 
-    const result = binarySearch(sortedArray, target);
-    res.status(200).json(result);
+    const { result, timeTaken } = measureExecutionTime(binarySearch, [sortedArray, target]);
+    res.status(200).json({ foundAtIndex: result, executionTime: timeTaken });
   } catch (err) {
     res.status(400).json({ error: err.message });
+  }
+});
+
+// Save Execution Logs
+router.post('/log', async (req, res) => {
+  try {
+    const log = new AlgorithmLog(req.body);
+    await log.save();
+    res.status(201).json({ message: 'Log saved successfully', log });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 
