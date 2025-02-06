@@ -14,6 +14,10 @@ const { measureExecutionTime } = require('../utils/performance');
 // Import execution for logging algorithms
 const AlgorithmLog = require('../models/AlgorithmLog');
 
+// Import sorting and searching API
+const sortingController = require('../controllers/sortingController');
+const searchingController = require('../controllers/searchingController');
+
 // Sorting Routes
 // Bubble Sort Route
 router.post('/sort/bubble', validateArray, (req, res) => {
@@ -85,6 +89,9 @@ router.post('/log', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+router.post('/sort', sortingController.sortArray);
+router.post('/search', searchingController.searchArray);
 
 // Metadata Route
 router.get('/metadata', (req, res) => {

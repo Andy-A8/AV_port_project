@@ -6,6 +6,7 @@ const AlgorithmLogSchema = new mongoose.Schema({
   output: [Number],
   steps: [[Number]],
   executionTime: String,
+  timestamp: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('AlgorithmLog', AlgorithmLogSchema);
