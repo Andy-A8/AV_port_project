@@ -1,5 +1,5 @@
 const AlgorithmLog = require('../models/AlgorithmLog');
-const { bubbleSort, quickSort } = require('../utils/sortingAlgorithms');
+const { bubbleSort, quickSort } = require('../services/sortingService');
 
 exports.sortArray = async (req, res) => {
   const { array, algorithm } = req.body;
@@ -11,7 +11,7 @@ exports.sortArray = async (req, res) => {
   } else if (algorithm == 'quick') {
     result = quickSort(array);
   } else {
-      return es.status(400).json({ error: "Invalid sorting algorithm" });
+      return res.status(400).json({ error: "Invalid sorting algorithm" });
   }
 
   // Save execution log
