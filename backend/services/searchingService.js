@@ -36,4 +36,5 @@ function binarySearch(array, target) {
   return { found: false, index: -1, steps }; // If target not found
 }
 
+// Export both functions
 module.exports = { linearSearch, binarySearch };

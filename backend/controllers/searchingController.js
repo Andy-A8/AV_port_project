@@ -9,6 +9,8 @@ exports.searchArray = async (req, res) => {
     result = binarySearch(array, target);
   } else if (algorithm === 'linear') {
     result = linearSearch(array, target);
+  } else {
+    return res.status(400).json({ error: 'Invalid search algorithm' });
   }
 
   // Save execution log
