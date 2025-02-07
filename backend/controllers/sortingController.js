@@ -1,4 +1,4 @@
-const AlgorithmLog = require('../models/AlgorithmLog');
+const algorithmLog = require('../models/algorithmLog');
 const { bubbleSort, quickSort } = require('../services/sortingService');
 
 exports.sortArray = async (req, res) => {
@@ -15,7 +15,7 @@ exports.sortArray = async (req, res) => {
   }
 
   // Save execution log to MongoDB
-  const log = new AlgorithmLog({
+  const log = new algorithmLog({
     algorithm,
     input: array,
     output: JSON.stringify(result.sortedArray),

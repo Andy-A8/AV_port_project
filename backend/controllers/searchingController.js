@@ -1,4 +1,4 @@
-const AlgorithmLog = require('../models/AlgorithmLog');
+const algorithmLog = require('../models/algorithmLog');
 const { binarySearch, linearSearch } = require('../services/searchingService');
 
 exports.searchArray = async (req, res) => {
@@ -14,7 +14,7 @@ exports.searchArray = async (req, res) => {
   }
 
   // Save execution log to MongoDB
-  const log = new AlgorithmLog({
+  const log = new algorithmLog({
     algorithm,
     input: array,
     output: result.index !== -1 ? `Found at index ${result.index}` : 'Not found',
