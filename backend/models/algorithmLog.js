@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const AlgorithmLogSchema = new mongoose.Schema({
+const algorithmLogSchema = new mongoose.Schema({
   algorithm: { type: String, required: true },
   input: { type: Array, required: true },
   output: { type: String, required: true },
@@ -9,4 +9,4 @@ const AlgorithmLogSchema = new mongoose.Schema({
   timestamp: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('AlgorithmLog', AlgorithmLogSchema);
+module.exports = mongoose.model('algorithmLog', algorithmLogSchema);
