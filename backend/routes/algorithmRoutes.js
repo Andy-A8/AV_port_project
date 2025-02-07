@@ -12,7 +12,7 @@ const { linearSearch, binarySearch } = require('../services/searchingService');
 const { measureExecutionTime } = require('../utils/performance');
 
 // Import execution for logging algorithms
-const AlgorithmLog = require('../models/AlgorithmLog');
+const algorithmLog = require('../models/algorithmLog');
 
 // Import sorting and searching API
 const sortingController = require('../controllers/sortingController');
@@ -82,7 +82,7 @@ router.post('/search/binary', validateSearchInput, (req, res) => {
 // Save Execution Logs
 router.post('/log', async (req, res) => {
   try {
-    const log = new AlgorithmLog(req.body);
+    const log = new algorithmLog(req.body);
     await log.save();
     res.status(201).json({ message: 'Log saved successfully', log });
   } catch (error) {
@@ -93,7 +93,7 @@ router.post('/log', async (req, res) => {
 // Fetch all algorithm execution logs
 router.get('/history', async (req, res) => {
   try {
-    const logs = await AlgorithmLog.find().sort({ createdAt: -1 }); //  Get latest first
+    const logs = await algorithmLog.find().sort({ createdAt: -1 }); //  Get latest first
     res.json(logs);
   } catch (err) {
     console.error("Error retrieveing history", err);
