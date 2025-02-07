@@ -1,4 +1,5 @@
 // Middleware to validate input for sorting algorithms
+
 const validateArray = (req, res, next) => {
   const { array } = req.body;
 
