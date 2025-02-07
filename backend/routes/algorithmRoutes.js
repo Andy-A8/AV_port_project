@@ -93,10 +93,11 @@ router.post('/log', async (req, res) => {
 // Fetch all algorithm execution logs
 router.get('/history', async (req, res) => {
   try {
-    const logs = await AlgorithmLog.find().sort({ createdAT: -1 }); //  Get latest first
+    const logs = await AlgorithmLog.find().sort({ createdAt: -1 }); //  Get latest first
     res.json(logs);
   } catch (err) {
-    res.status(500).json({ error: "Error retrieving history" });
+    console.error("Error retrieveing history", err);
+    res.status(500).json({ error: err.message });
   }
 });
 
