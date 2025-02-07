@@ -90,6 +90,16 @@ router.post('/log', async (req, res) => {
   }
 });
 
+// Fetch all algorithm execution logs
+router.get('/history', async (req, res) => {
+  try {
+    const logs = await AlgorithmLog.find().sort({ createdAT: -1 }); //  Get latest first
+    res.json(logs);
+  } catch (err) {
+    res.status(500).json({ error: "Error retrieving history" });
+  }
+});
+
 router.post('/sort', sortingController.sortArray);
 router.post('/search', searchingController.searchArray);
 
