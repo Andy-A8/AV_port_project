@@ -13,7 +13,7 @@ exports.searchArray = async (req, res) => {
     return res.status(400).json({ error: 'Invalid search algorithm' });
   }
 
-  // Save execution log
+  // Save execution log to MongoDB
   const log = new AlgorithmLog({
     algorithm,
     input: array,
