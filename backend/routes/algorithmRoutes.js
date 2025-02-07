@@ -90,8 +90,8 @@ router.post('/log', async (req, res) => {
   }
 });
 
-// Fetch all algorithm execution logs
-router.get('/history', async (req, res) => {
+// Get all algorithm execution logs
+router.get('/logs', async (req, res) => {
   try {
     const logs = await algorithmLog.find().sort({ createdAt: -1 }); //  Get latest first
     res.json(logs);
