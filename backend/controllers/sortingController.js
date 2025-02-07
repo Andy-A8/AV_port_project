@@ -6,19 +6,19 @@ exports.sortArray = async (req, res) => {
   let result;
 
 // Select the appropriate sorting algorithm
-  if (algorithm === 'bubble') {
+  if (algorithm === 'bubbleSort') {
     result = bubbleSort(array);
-  } else if (algorithm == 'quick') {
+  } else if (algorithm == 'quickSort') {
     result = quickSort(array);
   } else {
       return res.status(400).json({ error: "Invalid sorting algorithm" });
   }
 
-  // Save execution log
+  // Save execution log to MongoDB
   const log = new AlgorithmLog({
     algorithm,
     input: array,
-    output: result.sortedArray,
+    output: JSON.stringify(result.sortedArray),
     steps: result.steps,
     executionTime: `${result.steps.length} steps`
   });
