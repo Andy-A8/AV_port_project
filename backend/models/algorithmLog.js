@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const AlgorithmLogSchema = new mongoose.Schema({
-  algorithm: String,
-  input: [Number],
-  output: [Number],
-  steps: [[Number]],
-  executionTime: String,
+  algorithm: { type: String, required: true },
+  input: { type: Array, required: true },
+  output: { type: String, required: true },
+  steps: { type: Array, required: true },
+  executionTime: { type: String, required: true },
   timestamp: { type: Date, default: Date.now }
 });
 
